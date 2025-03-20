@@ -1,10 +1,9 @@
 export class user {
-  iduser: String;
-  name: String;
-  document: String;
-  password: String;
-  phone: String;
-  email: String;
-  status: Boolean;
-
+  iduser: string;
+  name: string;
+  document: string;
+  password: string;
+  phone: string;
+  email: string;
+  status: boolean;
 }
