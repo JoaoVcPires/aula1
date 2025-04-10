@@ -46,11 +46,12 @@ export class UserService {
     return this.mapToEntity(user);
   }
 
-  async update(UpdateUserDto: UpdateUserDto) /*: Promise<User>*/ {
-    //const user = await this.prisma.user.update({
-    //data: UpdateUserDto,
-    //});
-    //return "teste"; //this.mapToEntity(user);
+  async update(document: string,UpdateUserDto: UpdateUserDto) /*: Promise<User>*/ {
+    const user = await this.prisma.user.update({
+    where:{ document },
+    data: UpdateUserDto
+    });
+    return this.mapToEntity(user);
   }
 
   remove(id: number) {
