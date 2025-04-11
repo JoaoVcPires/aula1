@@ -46,15 +46,21 @@ export class UserService {
     return this.mapToEntity(user);
   }
 
-  async update(document: string,UpdateUserDto: UpdateUserDto) /*: Promise<User>*/ {
+  async update(
+    document: string,
+    UpdateUserDto: UpdateUserDto,
+  ) /*: Promise<User>*/ {
     const user = await this.prisma.user.update({
-    where:{ document },
-    data: UpdateUserDto
+      where: { document },
+      data: UpdateUserDto,
     });
     return this.mapToEntity(user);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(document: string) {
+    await this.prisma.user.delete({
+      where: { document },
+    });
+    return { message: 'Registro removido com sucesso' };
   }
 }
