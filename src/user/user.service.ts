@@ -29,7 +29,7 @@ export class UserService {
         email: createUserDto.email,
         password: createUserDto.password,
         phone: createUserDto.phone,
-        iduser: createUserDto.iduser,
+        //iduser: createUserDto.iduser,
         status: createUserDto.status,
       },
     });
@@ -42,24 +42,25 @@ export class UserService {
   }
 
   async findOne(iduser: string): Promise<User> {
-    const user = await this.prisma.user.findUnique;
+    const user = await this.prisma.user.findUnique({
+      where: {
+        iduser: iduser,
+      },
+    });
     return this.mapToEntity(user);
   }
 
-  async update(
-    document: string,
-    UpdateUserDto: UpdateUserDto,
-  ) /*: Promise<User>*/ {
+  async update(iduser: string, UpdateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.prisma.user.update({
-      where: { document },
+      where: { iduser },
       data: UpdateUserDto,
     });
     return this.mapToEntity(user);
   }
 
-  async remove(document: string) {
+  async remove(iduser: string) {
     await this.prisma.user.delete({
-      where: { document },
+      where: { iduser },
     });
     return { message: 'Registro removido com sucesso' };
   }
